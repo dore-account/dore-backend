@@ -26,19 +26,19 @@ docker-compose up --build
 ## docker rails関連コマンド
 
 ```
-docker-compose exec rails <実行したいコマンド>
+docker-compose exec web <実行したいコマンド>
 
 # bundle install
-docker-compose exec rails bundle install
+docker-compose exec web bundle install
 
 # DB作成
-docker-compose exec rails rails db:create
+docker-compose exec web rails db:create
 
 # マイグレーション実行
-docker-compose exec rails rails db:migrate
+docker-compose exec web rails db:migrate
 
 # データの投入
-docker-compose exec rails rails db:seed
+docker-compose exec web rails db:seed
 
 ```
 
@@ -53,4 +53,9 @@ docker compose run --rm web rails db:create
 
 # コンテナの立ち上げ
 docker compose up -d
+```
+
+```
+# GraphiQlアプリのインストール
+$ brew install --cask graphiql
 ```
