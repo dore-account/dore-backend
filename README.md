@@ -40,6 +40,40 @@ docker-compose exec web rails db:migrate
 # データの投入
 docker-compose exec web rails db:seed
 
+# モデルの作成
+docker-compose exec web rails generate model モデル名
+
+```
+
+### railsコンソールを使う
+
+```
+#入りたいコンテナ名を確認
+docker ps
+
+#コンテナに入る
+docker exec -it コンテナ名 /bin/bash
+
+#railsコンソールを開く
+root@96913c74e902:/app# bundle exec rails c
+
+irb(main):001:0>
+
+# 終了する場合
+##末尾が0以外だと抜けられない（式の途中と見做されている）
+irb(main):014:2> quit
+irb(main):015:2> exit
+irb(main):016:2> 
+
+##ctrl + c でクリアしてからexit
+irb(main):017:0> exit 
+
+```
+
+## Graphql
+
+```
+$ bundle exec rails g graphql:object クラス名
 ```
 
 ## Setup
