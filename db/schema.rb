@@ -10,14 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_13_051246) do
+ActiveRecord::Schema.define(version: 2022_01_14_022641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "user_details", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "uid"
+    t.string "name"
+    t.integer "gender", null: false
+    t.string "introduction"
+    t.integer "birth_day_yy"
+    t.integer "birth_day_mm"
+    t.integer "birth_day_dd"
+    t.string "twitter_link"
+    t.string "instagram_link"
+    t.string "tiktok_link"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_details_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "user_details", "users"
 end
