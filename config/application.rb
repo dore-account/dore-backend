@@ -39,5 +39,7 @@ module Myapp
 
     config.hosts = nil
     config.autoloader = :classic
+
+    config.paths.add 'app/graphql/types', eager_load: true
   end
 end
