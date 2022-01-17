@@ -4,16 +4,7 @@ module Types
     include GraphQL::Types::Relay::HasNodeField
     include GraphQL::Types::Relay::HasNodesField
 
-    field :user, Types::UserType, null: false do
-      argument :id, ID, required: false
-    end
-    def user(id:)
-      User.find(id)
-    end
-
-    field :users, [Types::UserType], null: false
-    def users
-      User.all
-    end
+    field :get_user, resolver: Queries::GetUser
+    field :get_users, resolver: Queries::GetUsers
   end
 end
