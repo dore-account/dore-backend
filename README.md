@@ -73,7 +73,11 @@ irb(main):017:0> exit
 ## Graphql
 
 ```
+# query type作成コマンド
 $ bundle exec rails g graphql:object クラス名
+
+# mutation type作成コマンド
+$ bundle exec rails g graphql:mutation クラス名
 ```
 
 ## Setup
