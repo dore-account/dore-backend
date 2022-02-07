@@ -63,10 +63,10 @@ irb(main):001:0>
 ##末尾が0以外だと抜けられない（式の途中と見做されている）
 irb(main):014:2> quit
 irb(main):015:2> exit
-irb(main):016:2> 
+irb(main):016:2>
 
 ##ctrl + c でクリアしてからexit
-irb(main):017:0> exit 
+irb(main):017:0> exit
 
 ```
 
@@ -78,6 +78,9 @@ $ bundle exec rails g graphql:object クラス名
 
 # mutation type作成コマンド
 $ bundle exec rails g graphql:mutation クラス名
+
+# Schemaファイルを自動生成
+# $ rake graphql:schema:dump
 ```
 
 ## Setup
@@ -88,6 +91,7 @@ docker compose build
 
 # DBの構築
 docker compose run --rm web rails db:create
+docker compose run --rm web rails db:migrate
 
 # コンテナの立ち上げ
 docker compose up -d
