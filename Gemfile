@@ -7,7 +7,9 @@ gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'bootsnap', '>= 1.4.4', require: false
-gem 'graphql'
+gem 'graphql', '~>1.13.8'
+gem 'faraday-http-cache', '~> 2.2.0'
+gem 'jwt', '~>2.3.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
