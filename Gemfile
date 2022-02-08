@@ -10,6 +10,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'graphql', '~>1.13.8'
 gem 'faraday-http-cache', '~> 2.2.0'
 gem 'jwt', '~>2.3.0'
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
