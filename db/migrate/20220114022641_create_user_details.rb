@@ -1,8 +1,8 @@
 class CreateUserDetails < ActiveRecord::Migration[6.1]
   def change
     create_table :user_details do |t|
-      t.references :user, foreign_key: true
-      t.string :uid
+      t.references :user, null: false, foreign_key: true
+      t.string :slug, null: false, index: { unique: true }
       t.string :name, defalut: ''
       t.integer :gender, null: false, defalut: 0
       t.string :introduction, defalut: ''
