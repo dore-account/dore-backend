@@ -1,14 +1,21 @@
 module Mutations
   class CreateUserDetail < BaseMutation
-    field :user, Types::UserType, null: false
+    field :user, Types::Objects::UserType, null: false
 
-    argument :params, Types::Input::UserDetailInputType, required: true
+    argument :params, Types::Inputs::UserDetailInputType, required: true
 
     def resolve(params:)
-      user_detail_params = Hash params
-      
-      user_detail = UserDetail.create(
-        user_detail_params
+      user_detail = UserDetail.create!(
+        user: current_user,
+        name: params.name,
+        gender: params.gender,
+        introduction: params.introduction,
+        birth_day_yy: params.birth_day_yy,
+        birth_day_mm: params.birth_day_mm,
+        birth_day_dd: params.birth_day_dd,
+        twitter_link: params.twitter_link,
+        instagram_link: params.instagram_link,
+        tiktok_link: params.tiktok_link,
       )
 
       { user: user_detail }

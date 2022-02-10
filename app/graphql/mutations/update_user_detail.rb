@@ -1,22 +1,22 @@
 module Mutations
   class UpdateUserDetail < BaseMutation
-    field :user, Types::UserType, null: false
+    field :user, Types::Objects::UserType, null: false
 
-    argument :id, ID, required: true
-    argument :params, Types::Input::UserDetailInputType, required: true
+    argument :params, Types::Inputs::UserDetailInputType, required: true
 
-    def resolve(id:, params:)
+    def resolve(params:)
       user_detail_params = params.to_h
-      # TODO: userに結びついているuserDetailを更新
-      # user = User.find(id)
-      user_detail = UserDetail.update(
+
+      user_detail = UserDetail.find_or_initialize_by(user: context[:current_user])
+
+      user_detail.update!(
         user_detail_params
       )
 
       { user: user_detail }
-      rescue ActiveRecord::RecordInvalid => e
-        GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}:"\
-          " #{e.record.errors.full_messages.join(', ')}")
+    rescue ActiveRecord::RecordInvalid => e
+      GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}:"\
+        " #{e.record.errors.full_messages.join(', ')}")
     end
   end
 end
