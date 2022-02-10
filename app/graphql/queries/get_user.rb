@@ -1,11 +1,11 @@
 module Queries
-  class GetUser < Queries::BaseQuery
-    type Types::UserType, null: false
+  class GetUser < BaseQuery
+    type Types::Objects::UserType, null: false
 
-    argument :id, ID, required: false
 
-    def resolve(id:)
-      User.find(id)
+    def resolve
+      UserDetail.find_by(user: current_user)
+
     rescue ActiveRecord::RecordNotFound => _e
       GraphQL::ExecutionError.new('Note does not exist.')
     rescue ActiveRecord::RecordInvalid => e

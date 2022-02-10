@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2022_01_14_022641) do
   enable_extension "plpgsql"
 
   create_table "user_details", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "uid"
+    t.bigint "user_id", null: false
+    t.string "slug", null: false
     t.string "name"
     t.integer "gender", null: false
     t.string "introduction"
@@ -29,10 +29,13 @@ ActiveRecord::Schema.define(version: 2022_01_14_022641) do
     t.string "tiktok_link"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["slug"], name: "index_user_details_on_slug", unique: true
     t.index ["user_id"], name: "index_user_details_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "uid", null: false
+    t.string "email", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
