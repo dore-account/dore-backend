@@ -12,6 +12,10 @@ module Types
       field :twitter_link, String, null: false
       field :instagram_link, String, null: false
       field :tiktok_link, String, null: false
+
+      def id
+        object.user_id
+      end
     end
   end
 end

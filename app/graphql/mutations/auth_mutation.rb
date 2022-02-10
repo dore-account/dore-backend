@@ -1,5 +1,5 @@
-module Queries
-  class AuthQuery < BaseQuery
+module Mutations
+  class AuthMutation < BaseMutation
     def authorized?(args)
       # 認可できない場合はGraphQL::ExecutionErrorをraise
       raise GraphQL::ExecutionError, 'login required!!' unless context[:current_user]
@@ -8,3 +8,4 @@ module Queries
     end
   end
 end
+
