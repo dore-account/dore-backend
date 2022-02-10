@@ -4,11 +4,21 @@ require:
   - rubocop-performance
   - rubocop-rubycw
 
+Rails:
+  Enabled: true
+
+Documentation:
+  Exclude:
+    - 'db/migrate/*'
+
 # 自動生成されるものはチェック対象から除外する
 AllCops:
   Exclude:
-    - "vendor/**/*" # rubocop config/default.yml
-    - "db/schema.rb"
+    - bin/*
+    - db/schema.rb
+    - db/seed.rb
+    - db/fixtures/**/*
+    - vendor/**/*
   DisplayCopNames: true
   NewCops: enable
 
@@ -191,13 +201,13 @@ Lint/UnusedMethodArgument:
 
 ##################### Metrics ##################################
 
-# 30 まではギリギリ許せる範囲だった
 Metrics/AbcSize:
-  Max: 30
+  Exclude:
+    - 'db/migrate/*'
 
 # 6 は強すぎるので緩める
 Metrics/CyclomaticComplexity:
-  Max: 10
+  Max: 15
 
 # * 警告 120文字
 # * 禁止 160文字
