@@ -1,10 +1,9 @@
 module Queries
-  class GetUsers < Queries::BaseQuery
+  class Creators < BaseQuery
     type [Types::Objects::UserType], null: false
 
-
     def resolve
-      User.all
+      Creator.all
     end
   end
 end

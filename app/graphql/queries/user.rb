@@ -1,5 +1,5 @@
 module Queries
-  class GetUser < BaseQuery
+  class User < BaseQuery
     type Types::Objects::UserType, null: false
 
 
