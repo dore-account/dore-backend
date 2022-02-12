@@ -1,5 +1,10 @@
 module Types
   class MutationType < Types::Objects::BaseObject
-    field :update_user_detail, mutation: Mutations::UpdateUserDetail
+    # user
+    field :update_user, mutation: Mutations::User::UpdateUser
+    field :update_user_info, mutation: Mutations::User::UpdateInfo
+
+    # creator
+    field :update_creator, mutation: Mutations::Creator::UpdateCreator
   end
 end
