@@ -5,7 +5,7 @@ ruby '2.7.5'
 
 gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
 gem 'pg', '~> 1.1'
-gem 'puma', '~> 5.0'
+gem 'puma', '>= 5.6.2'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'graphql', '~>1.13.8'
 gem 'faraday-http-cache', '~> 2.2.0'
