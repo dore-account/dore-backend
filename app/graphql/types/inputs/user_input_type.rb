@@ -1,6 +1,6 @@
 module Types
   module Inputs
-    class UserDetailInputType < BaseInputObject
+    class UserInputType < BaseInputObject
       argument :name, String, required: true
       argument :gender, Types::Enums::GenderStatus, required: true
       argument :introduction, String, required: false
