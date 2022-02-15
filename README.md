@@ -32,16 +32,16 @@ docker-compose exec web <実行したいコマンド>
 docker-compose exec web bundle install
 
 # DB作成
-docker-compose exec web rails db:create
+docker-compose exec web bundle exec rails db:create
 
 # マイグレーション実行
-docker-compose exec web rails db:migrate
+docker-compose exec web bundle exec rails db:migrate
 
 # データの投入
 docker-compose exec web rails db:seed
 
 # モデルの作成
-docker-compose exec web rails generate model モデル名
+docker-compose exec web bundle exec rails generate model モデル名
 
 ```
 

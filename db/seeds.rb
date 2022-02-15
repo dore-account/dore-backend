@@ -11,3 +11,7 @@ Category.create!(name: 'インスタグラマー')
 Category.create!(name: 'アイドル')
 Category.create!(name: 'メイド')
 Category.create!(name: '一般人')
+
+User.create!(uid: "1", email: "test1")
+User.create!(uid: "2", email: "test2")
+User.create!(uid: "3", email: "test3")
