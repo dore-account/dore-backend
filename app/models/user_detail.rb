@@ -1,6 +1,8 @@
 class UserDetail < ApplicationRecord
   before_create :set_slug
   belongs_to :user
+  has_many :user_images, dependent: :destroy
+  has_many :images, through: :user_images, class_name: 'Image', source: :image
 
   validates :slug, uniqueness: true
 
