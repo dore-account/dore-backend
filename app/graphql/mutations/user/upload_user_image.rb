@@ -8,14 +8,14 @@ module Mutations
       def resolve(image:)
         user = UserDetail.find_by(user: current_user)
 
-        raise ActionController::BadRequest unless user.user_images.size < 5
+        raise ActionController::BadRequest unless user.user_images.size < 7
 
         ActiveRecord::Base.transaction do
-          newImage = Image.new
+          new_image = Image.new
           # ApolloUploadServer::Uploadをそのまま渡せないのでioとfilenameを渡す
-          newImage.image.attach(io: image.to_io, filename: image.original_filename)
+          new_image.image.attach(io: image.to_io, filename: image.original_filename)
 
-          user.user_images.create!(image: newImage)
+          user.user_images.create!(image: new_image)
         end
 
         { user: user }
