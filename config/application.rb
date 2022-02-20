@@ -41,5 +41,6 @@ module Myapp
     config.autoloader = :classic
 
     config.paths.add 'app/graphql/types', eager_load: true
+    config.middleware.use ActionDispatch::Flash
   end
 end

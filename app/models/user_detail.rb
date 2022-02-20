@@ -8,15 +8,16 @@ class UserDetail < ApplicationRecord
 
   enum gender: {
     male: 0,
-    woman: 1,
+    woman: 1
   }
 
   private
-    def set_slug
-      # id未設定、または、すでに同じidのレコードが存在する場合はループに入る
-      while slug.blank? || UserDetail.find_by(slug: slug).present? do
-        # ランダムな20文字をidに設定し、whileの条件検証に戻る
-        self.slug = SecureRandom.alphanumeric(20)
-      end
+
+  def set_slug
+    # id未設定、または、すでに同じidのレコードが存在する場合はループに入る
+    while slug.blank? || UserDetail.find_by(slug: slug).present? do
+      # ランダムな20文字をidに設定し、whileの条件検証に戻る
+      self.slug = SecureRandom.alphanumeric(20)
     end
+  end
 end

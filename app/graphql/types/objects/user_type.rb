@@ -15,7 +15,7 @@ module Types
       field :tiktok_link, String, null: false
       field :images, [Types::Objects::UserImageType], null: false
 
-      field :info, Types::Objects::UserInfoType, null: false
+      field :info, Types::Objects::UserInfoType, null: true
 
       def id
         object.user_id
