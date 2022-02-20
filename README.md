@@ -6,6 +6,9 @@
 #Dockerコンテナを起動
 docker-compose up
 
+#デバック用のコンテナを起動
+docker-compose -f docker-compose.debug.yml up
+
 # バックグラウンドでDockerコンテナを起動したいは以下のコマンドで実行します。
 docker-compose up -d
 
@@ -19,7 +22,7 @@ docker-compose logs -f web
 docker-compose up --build
 
 #完全に再ビルドを行う
-docker-compose run web bundle install
+docker-compose run --rm web bundle install
 docker-compose up --build
 ```
 
@@ -43,6 +46,27 @@ docker-compose exec web rails db:seed
 # モデルの作成
 docker-compose exec web bundle exec rails generate model モデル名
 
+```
+
+## beybugを使う
+
+```
+# コンテナを起動
+## アタッチするコマンドを入力
+docker attach <container name or ID>
+// docker attach dore-backend_web_1
+
+# デタッチ
+Ctrl-P Ctrl-Q
+
+# コマンド
+next       一行進む
+continue   次のブレイクポイントに進む
+quit       終了
+step       メソッドの内部にステップインする
+list       ソースコードを表示する
+up         ソースコードの上を表示する
+down       ソースコードの下を表示する
 ```
 
 ### railsコンソールを使う
@@ -88,6 +112,12 @@ $ bundle exec rails g graphql:mutation クラス名
 ## Setup
 
 ```
+# 作業リポジトリを作成(必要ならば)
+mkdir dore-project
+
+# ローカルにclone
+git clone git@github.com:tamaki8021/dore-backend.git
+
 # イメージ作成
 docker compose build
 
