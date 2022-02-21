@@ -6,5 +6,9 @@ module Types
 
     field :user, resolver: Queries::User
     field :creators, resolver: Queries::Creators
+
+    # purchase
+    field :all_purchases, resolver: Queries::Purchase::AllPurchases
+    field :purchase, resolver: Queries::Purchase::Purchase
   end
 end
