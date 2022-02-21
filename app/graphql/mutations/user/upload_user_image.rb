@@ -6,7 +6,7 @@ module Mutations
       argument :image, ApolloUploadServer::Upload, required: true
 
       def resolve(image:)
-        user = UserDetail.find_by(user: current_user)
+        user = ::UserDetail.find_by(user: current_user)
 
         raise ActionController::BadRequest unless user.user_images.size < 7
 
