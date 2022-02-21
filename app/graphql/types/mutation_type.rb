@@ -8,5 +8,8 @@ module Types
 
     # creator
     field :update_creator, mutation: Mutations::Creator::UpdateCreator
+
+    # purchase
+    field :upload_purchase_video, mutation: Mutations::Purchase::UploadPurchaseVideo
   end
 end
