@@ -27,3 +27,5 @@
 /config/master.key
 
 /.devcontainer
+.env
+keyfile.json

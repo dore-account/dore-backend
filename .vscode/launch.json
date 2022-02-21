@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Listen for rdebug-ide",
+      "type": "Ruby",
+      "request": "attach",
+      "cwd": "${workspaceRoot}",
+      // ボリューム先に合わせて適宜変更してください
+      "remoteWorkspaceRoot": "/myapp",
+      "remoteHost": "0.0.0.0",
+      "remotePort": "1234"
+    }
+  ]
+}

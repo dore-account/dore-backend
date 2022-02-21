@@ -2,10 +2,8 @@ module Queries
   class User < BaseQuery
     type Types::Objects::UserType, null: false
 
-
     def resolve
-      UserDetail.find_by(user: current_user)
-
+      UserDetail.find_by!(user: current_user)
     rescue ActiveRecord::RecordNotFound => _e
       GraphQL::ExecutionError.new('Note does not exist.')
     rescue ActiveRecord::RecordInvalid => e

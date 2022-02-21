@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module FirebaseAuthConcern
   extend ActiveSupport::Concern
   include ActionController::HttpAuthentication::Token::ControllerMethods
@@ -12,7 +10,7 @@ module FirebaseAuthConcern
 
   def authenticate_user
     authenticate_with_http_token do |token, _|
-      @current_user = FirebaseAuthClient.authenticate_user(token)
+      @current_user = ::FirebaseAuthClient.verify_id_token(token)
     rescue StandardError => e
       p e
       @current_user = nil
@@ -23,8 +21,4 @@ module FirebaseAuthConcern
   def current_user
     @current_user
   end
-
-  # def id_token
-  #   request.headers['Authorization'].split.last
-  # end
 end

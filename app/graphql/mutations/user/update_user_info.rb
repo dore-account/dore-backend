@@ -1,6 +1,6 @@
 module Mutations
   module User
-    class UpdateInfo < BaseMutation
+    class UpdateUserInfo < BaseMutation
       field :user, Types::Objects::UserType, null: false
 
       argument :params, Types::Inputs::UserInfoInputType, required: false

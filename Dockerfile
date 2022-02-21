@@ -1,4 +1,4 @@
-FROM ruby:2.7.5
+FROM ruby:3.0.1
 
 ## nodejsとyarnはwebpackをインストールする際に必要
 # yarnパッケージ管理ツールをインストール
