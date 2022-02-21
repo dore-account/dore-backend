@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_14_070209) do
+ActiveRecord::Schema.define(version: 2022_02_21_075808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,15 @@ ActiveRecord::Schema.define(version: 2022_02_14_070209) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "purchases", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "video_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_purchases_on_user_id"
+    t.index ["video_id"], name: "index_purchases_on_video_id"
+  end
+
   create_table "user_details", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "slug", null: false
@@ -120,12 +129,19 @@ ActiveRecord::Schema.define(version: 2022_02_14_070209) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "videos", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "creator_categories", "categories"
   add_foreign_key "creator_categories", "creators"
   add_foreign_key "creator_infos", "creators"
   add_foreign_key "creators", "users"
+  add_foreign_key "purchases", "users"
+  add_foreign_key "purchases", "videos"
   add_foreign_key "user_details", "users"
   add_foreign_key "user_images", "images"
   add_foreign_key "user_images", "user_details"
