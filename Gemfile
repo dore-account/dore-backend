@@ -14,6 +14,7 @@ gem 'jwt', '~>2.3.0'
 gem 'pg', '~> 1.1'
 gem 'puma', '>= 5.6.2'
 gem 'rack-cors'
+gem 'stripe'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
