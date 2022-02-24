@@ -1,3 +1,5 @@
+# rubocop:disable all
+
 module FirebaseAuthClient
   ALGORITHM = 'RS256'.freeze
 

@@ -1,3 +1,5 @@
+# rubocop:disable all
+
 class GraphqlController < ApplicationController
   # If accessing from outside this domain, nullify the session
   # This allows for outside API access while preventing CSRF attacks,
