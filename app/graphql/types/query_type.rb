@@ -10,5 +10,9 @@ module Types
     # purchase
     field :all_purchases, resolver: Queries::Purchase::AllPurchases
     field :purchase, resolver: Queries::Purchase::Purchase
+
+    # payment_method
+    field :payment_methods, resolver: Queries::PaymentMethod::PaymentMethods
+    field :setup_payment_method, resolver: Queries::PaymentMethod::SetupPaymentMethod
   end
 end
