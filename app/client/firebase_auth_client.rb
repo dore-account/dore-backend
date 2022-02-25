@@ -2,12 +2,13 @@
 
 module FirebaseAuthClient
   ALGORITHM = 'RS256'.freeze
+  CLIENT_CERT_URL = 'https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com'
 
   class << self
     def verify_id_token(token)
       raise 'Id token must be a String' unless token.is_a?(String)
 
-      full_decoded_token = decode_jwt(token, false)
+      full_decoded_token = decode_jwt(token)
       errors = validate(full_decoded_token)
       raise errors.join(' / ') if errors.present?
 
@@ -20,7 +21,7 @@ module FirebaseAuthClient
       end
 
       certificate = OpenSSL::X509::Certificate.new(public_key)
-      decoded_token = decode_jwt(token, true, certificate.public_key, { algorithm: ALGORITHM, verify_iat: true })
+      decoded_token = decode_jwt(token, certificate.public_key, true, { algorithm: ALGORITHM, verify_iat: true })
 
       User.find_or_create_by!(uid: decoded_token[:payload]['sub'], email: decoded_token[:payload]['email'])
     end
@@ -28,7 +29,7 @@ module FirebaseAuthClient
     # JWTをデコード
     def decode_jwt(token, key=nil, verify=false, options={})
       begin
-        decoded_token = JWT.decode(token, verify, key, options)
+        decoded_token = JWT.decode(token, key, verify, options)
       rescue JWT::ExpiredSignature => e
         raise 'Firebase ID token has expired. Get a fresh token from your client app and try again.'
       rescue => e
@@ -70,13 +71,13 @@ module FirebaseAuthClient
 
     # トークンが正しい鍵から作られているか確認する
     def fetch_public_keys
-      # uri = URI.parse('https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com')
+      uri = URI.parse(CLIENT_CERT_URL)
 
-      # https = Net::HTTP.new(uri.host, uri.port)
-      # https.use_ssl = true
+      https = Net::HTTP.new(uri.host, uri.port)
+      https.use_ssl = true
 
-      # res = https.start { https.get(uri.request_uri) }
-      res = cached_connection.get('https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com')
+      res = https.start { https.get(uri.request_uri) }
+      # res = cached_connection.get('https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com')
       data = JSON.parse(res.body)
 
       return data unless data['error']
