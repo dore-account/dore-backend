@@ -8,7 +8,8 @@ module FirebaseAuthClient
     def verify_id_token(token)
       raise 'Id token must be a String' unless token.is_a?(String)
 
-      full_decoded_token = decode_jwt(token)
+      full_decoded_token = decode_jwt(token, false)
+      # byebug
       errors = validate(full_decoded_token)
       raise errors.join(' / ') if errors.present?
 
@@ -30,8 +31,11 @@ module FirebaseAuthClient
     def decode_jwt(token, key=nil, verify=false, options={})
       begin
         decoded_token = JWT.decode(token, key, verify, options)
+        # byebug
       rescue JWT::ExpiredSignature => e
-        raise 'Firebase ID token has expired. Get a fresh token from your client app and try again.'
+        raise "Firebase ID token has expired. Get a fresh token from your client app and try again. #{e.message}"
+      rescue JWT::VerificationError => e
+        raise e.message
       rescue => e
         raise "Firebase ID token has invalid signature. #{e.message}"
       end

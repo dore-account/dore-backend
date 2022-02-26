@@ -31,7 +31,6 @@ module StripeClient
       return account if account
 
       customer = Stripe::Customer.create({ email: user.email })
-      p customer
       Account.create!(user: user, customer_id: customer.id)
     end
   end
