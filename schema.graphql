@@ -114,6 +114,21 @@ type Mutation {
   ): UploadUserImagePayload
 }
 
+type PaymentMethod {
+  """
+  カードブランド
+  """
+  brand: String!
+  expMonth: Int!
+  expYear: String!
+
+  """
+  payment_methodのid
+  """
+  id: String!
+  last4: String!
+}
+
 type PurchaseVideo {
   """
   動画のID
@@ -129,8 +144,17 @@ type PurchaseVideo {
 type Query {
   allPurchases: [PurchaseVideo!]!
   creators: [Creator!]!
+  paymentMethods: [PaymentMethod!]!
   purchase(id: ID!): PurchaseVideo!
+  setupPaymentMethod: Stripe!
   user: User!
+}
+
+type Stripe {
+  """
+  クライアントに渡すkey
+  """
+  clientSecret: String!
 }
 
 """

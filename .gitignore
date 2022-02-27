@@ -27,5 +27,6 @@
 /config/master.key
 
 /.devcontainer
+.idea
 .env
 keyfile.json
