@@ -4,5 +4,5 @@ class User < ApplicationRecord
   has_one :creator
   has_one :account
 
-  has_many :purchase, dependent: :destroy
+  has_many :purchases, dependent: :destroy
 end

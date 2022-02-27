@@ -1,6 +1,9 @@
 class Creator < ApplicationRecord
   belongs_to :user
   has_one :creator_info
-  has_many :creator_category
-  has_many :product
+  has_many :creator_categories
+  has_many :products
+
+  belongs_to :user_detail, foreign_key: :user_id, primary_key: :user_id, inverse_of: :creator
+  has_many :product_infos, through: :products
 end
