@@ -241,7 +241,7 @@ type Query {
   product(id: ID!): Product!
   purchase(id: ID!): PurchaseVideo!
   setupPaymentMethod: Stripe!
-  user(id: ID!): User!
+  user(id: ID): User!
 }
 
 type Stripe {
