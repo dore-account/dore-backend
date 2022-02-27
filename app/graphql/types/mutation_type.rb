@@ -11,5 +11,10 @@ module Types
 
     # purchase
     field :upload_purchase_video, mutation: Mutations::Purchase::UploadPurchaseVideo
+
+    # product
+    field :create_product, mutation: Mutations::Product::CreateProduct
+    field :update_product, mutation: Mutations::Product::UpdateProduct
+    field :delete_product, mutation: Mutations::Product::DeleteProduct
   end
 end

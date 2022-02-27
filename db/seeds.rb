@@ -17,3 +17,5 @@ User.create!(uid: "2", email: "test2")
 User.create!(uid: "3", email: "test3")
 
 UserDetail.create!(user_id: 1, slug: "", name: "test1", gender: 0, introduction: "", birth_day_yy: 1, birth_day_mm: 1, birth_day_dd: 1, twitter_link: "", instagram_link: "", tiktok_link: "")
+
+Creator.create!(user_id: 1)
