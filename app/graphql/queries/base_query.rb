@@ -6,7 +6,7 @@ module Queries
     end
 
     def current_creator
-      context[:current_creator]
+      current_user.creator
     end
   end
 end
