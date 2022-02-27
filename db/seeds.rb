@@ -12,10 +12,12 @@ Category.create!(name: 'アイドル')
 Category.create!(name: 'メイド')
 Category.create!(name: '一般人')
 
-User.create!(uid: "1", email: "test1")
-User.create!(uid: "2", email: "test2")
-User.create!(uid: "3", email: "test3")
+User.create!(uid: '1', email: 'test1')
+User.create!(uid: '2', email: 'test2')
+User.create!(uid: '3', email: 'test3')
 
-UserDetail.create!(user_id: 1, slug: "", name: "test1", gender: 0, introduction: "", birth_day_yy: 1, birth_day_mm: 1, birth_day_dd: 1, twitter_link: "", instagram_link: "", tiktok_link: "")
+UserDetail.create!(user_id: 1, slug: '', name: 'test1', gender: 0, introduction: '', birth_day_yy: 1, birth_day_mm: 1, birth_day_dd: 1, twitter_link: '', instagram_link: '', tiktok_link: '')
 
 Creator.create!(user_id: 1)
+Product.create!(creator_id: 1, status: 1)
+ProductInfo.create!(product_id: 1, name: '商品1', description: 'testtest', price: 1000, stock_quantity: 3)
