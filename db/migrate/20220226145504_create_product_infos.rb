@@ -5,6 +5,7 @@ class CreateProductInfos < ActiveRecord::Migration[6.1]
       t.string :name, null: false, default: ''
       t.string :description, null: false, default: ''
       t.integer :price, null: false
+      t.integer :stock_quantity, null: false, default: 0
 
       t.timestamps
     end

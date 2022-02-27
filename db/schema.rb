@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2022_02_26_145504) do
     t.string "name", default: "", null: false
     t.string "description", default: "", null: false
     t.integer "price", null: false
+    t.integer "stock_quantity", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_product_infos_on_product_id"
@@ -98,9 +99,11 @@ ActiveRecord::Schema.define(version: 2022_02_26_145504) do
 
   create_table "products", force: :cascade do |t|
     t.bigint "creator_id", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["creator_id"], name: "index_products_on_creator_id"
+    t.index ["id", "status"], name: "index_products_on_id_and_status", unique: true
   end
 
   create_table "purchases", force: :cascade do |t|
