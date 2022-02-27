@@ -8,7 +8,7 @@ module Types
     field :user, resolver: Queries::User::User
 
     # creator
-    field :creators, resolver: Queries::Creators
+    field :creators, resolver: Queries::Creator::Creators
 
     # product
     field :product, resolver: Queries::Product::Product

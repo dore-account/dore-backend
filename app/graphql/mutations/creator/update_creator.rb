@@ -15,7 +15,6 @@ module Mutations
         creator_category.update!(category_id: params.category_id)
 
         { creator: creator }
-
       rescue ActiveRecord::RecordInvalid => e
         GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}:"\
           " #{e.record.errors.full_messages.join(', ')}")
