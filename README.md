@@ -40,6 +40,9 @@ docker-compose exec web bundle exec rails db:create
 # マイグレーション実行
 docker-compose exec web bundle exec rails db:migrate
 
+# 直近のマイグレーションをリセットして実行
+docker-compose exec web bundle exec rails db:migrate:redo
+
 # データの投入
 docker-compose exec web rails db:seed
 
