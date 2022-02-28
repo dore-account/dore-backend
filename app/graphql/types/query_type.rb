@@ -11,6 +11,7 @@ module Types
     field :creators, resolver: Queries::Creator::Creators
 
     # product
+    field :products, resolver: Queries::Product::Products
     field :product, resolver: Queries::Product::Product
 
     # purchase

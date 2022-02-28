@@ -239,6 +239,7 @@ type Query {
   creators: [Creator!]!
   paymentMethods: [PaymentMethod!]!
   product(id: ID!): Product!
+  products: [Product!]!
   purchase(id: ID!): PurchaseVideo!
   setupPaymentMethod: Stripe!
   user(id: ID): User!
