@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_23_051654) do
+ActiveRecord::Schema.define(version: 2022_02_26_145504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,26 @@ ActiveRecord::Schema.define(version: 2022_02_23_051654) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "product_infos", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.string "name", default: "", null: false
+    t.string "description", default: "", null: false
+    t.integer "price", null: false
+    t.integer "stock_quantity", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_product_infos_on_product_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.bigint "creator_id", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["creator_id"], name: "index_products_on_creator_id"
+    t.index ["id", "status"], name: "index_products_on_id_and_status", unique: true
+  end
+
   create_table "purchases", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "video_id", null: false
@@ -149,6 +169,8 @@ ActiveRecord::Schema.define(version: 2022_02_23_051654) do
   add_foreign_key "creator_categories", "creators"
   add_foreign_key "creator_infos", "creators"
   add_foreign_key "creators", "users"
+  add_foreign_key "product_infos", "products"
+  add_foreign_key "products", "creators"
   add_foreign_key "purchases", "users"
   add_foreign_key "purchases", "videos"
   add_foreign_key "user_details", "users"

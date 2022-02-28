@@ -22,17 +22,17 @@ module Types
       end
 
       def age
-        today = Time.zone.today.strftime("%Y%m%d").to_i
+        today = Time.zone.today.strftime('%Y%m%d').to_i
         y = object.birth_day_yy
         m = object.birth_day_mm
         d = object.birth_day_dd
 
-        m = "0" + m.to_s if m < 10
-        d = "0" + d.to_s if d < 10
+        m = "0#{m}" if m < 10
+        d = "0#{d}" if d < 10
 
-        birth_day = y.to_s + m.to_s + d.to_s
+        birth_day = "#{y}#{m}#{d}"
 
-        (today - birth_day.to_i) / 10000
+        (today - birth_day.to_i) / 10_000
       end
 
       def info

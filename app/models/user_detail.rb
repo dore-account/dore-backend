@@ -3,6 +3,7 @@ class UserDetail < ApplicationRecord
   belongs_to :user
   has_many :user_image, dependent: :destroy
   has_many :images, through: :user_image, class_name: 'Image', source: :image
+  has_one :creator, foreign_key: :user_id, primary_key: :user_id, inverse_of: :user_detail
 
   validates :slug, uniqueness: true
 
