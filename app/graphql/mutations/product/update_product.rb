@@ -8,8 +8,9 @@ module Mutations
 
       def resolve(id:, params:)
         product = ::Product.find_by(id: id, creator: current_user.creator)
-        product_info = product.product_info
+        raise ActionController::BadRequest if product.nil?
 
+        product_info = product.product_info
         product_info.update!(params.to_h)
 
         { product: product_info }
