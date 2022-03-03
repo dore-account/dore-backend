@@ -6,8 +6,10 @@ module Types
 
     # user
     field :user, resolver: Queries::User::User
+    field :users, resolver: Queries::User::Users
 
     # creator
+    field :creator, resolver: Queries::Creator::Creator
     field :creators, resolver: Queries::Creator::Creators
 
     # product

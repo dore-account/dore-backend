@@ -17,7 +17,16 @@ User.create!(uid: '2', email: 'test2')
 User.create!(uid: '3', email: 'test3')
 
 UserDetail.create!(user_id: 1, slug: '', name: 'test1', gender: 0, introduction: '', birth_day_yy: 1, birth_day_mm: 1, birth_day_dd: 1, twitter_link: '', instagram_link: '', tiktok_link: '')
+UserDetail.create!(user_id: 2, slug: '', name: 'test22', gender: 1, introduction: 'hogehogehgeogheohgeo', birth_day_yy: 1, birth_day_mm: 1, birth_day_dd: 1, twitter_link: '', instagram_link: 'aa', tiktok_link: 'aa')
 
 Creator.create!(user_id: 1)
+Creator.create!(user_id: 2)
+
+CreatorInfo.create!(creator_id: 1, belongs: 'サイファークリエイション')
+
+CreatorCategory.create!(creator_id: 1, category_id: 1)
+CreatorCategory.create!(creator_id: 2, category_id: 2)
+CreatorCategory.create!(creator_id: 2, category_id: 3)
+
 Product.create!(creator_id: 1, status: 1)
 ProductInfo.create!(product_id: 1, name: '商品1', description: 'testtest', price: 1000, stock_quantity: 3)
