@@ -7,6 +7,7 @@ module Types
       field :price, Integer, null: false
       field :stock_quantity, Integer, null: false
       field :status, Types::Enums::ProductStatus, null: false
+      field :image, Types::Objects::ProductImageType, null: false
 
       def id
         object.product_id
@@ -14,6 +15,10 @@ module Types
 
       def status
         object.product.status
+      end
+
+      def image
+        object.product_image
       end
     end
   end

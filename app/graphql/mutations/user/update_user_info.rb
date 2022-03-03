@@ -1,6 +1,6 @@
 module Mutations
   module User
-    class UpdateUserInfo < BaseMutation
+    class UpdateUserInfo < AuthMutation
       field :user, Types::Objects::UserType, null: false
 
       argument :params, Types::Inputs::UserInfoInputType, required: false
@@ -10,7 +10,6 @@ module Mutations
         user_info.update!(stan: params.stan)
 
         { user: user_info.user.user_detail }
-
       rescue ActiveRecord::RecordInvalid => e
         GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}:"\
           " #{e.record.errors.full_messages.join(', ')}")
@@ -18,4 +17,3 @@ module Mutations
     end
   end
 end
-
