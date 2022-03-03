@@ -6,7 +6,7 @@ module Mutations
       argument :id, ID, required: true
 
       def resolve(id:)
-        user = UserDetail.find_by(user: current_user)
+        user = ::UserDetail.find_by(user: current_user)
 
         user.user_images.find_by(image_id: id).destroy!
 

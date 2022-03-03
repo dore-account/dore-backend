@@ -1,18 +1,13 @@
 module Mutations
   module User
-    class UpdateUser < BaseMutation
+    class UpdateUser < AuthMutation
       field :user, Types::Objects::UserType, null: false
 
       argument :params, Types::Inputs::UserInputType, required: true
 
       def resolve(params:)
-        user_detail_params = params.to_h
-
-        user_detail = ::UserDetail.find_or_initialize_by(user: context[:current_user])
-
-        user_detail.update!(
-          user_detail_params
-        )
+        user_detail = ::UserDetail.find_or_initialize_by(user: current_user)
+        user_detail.update!(params.to_h)
 
         { user: user_detail }
       rescue ActiveRecord::RecordInvalid => e
