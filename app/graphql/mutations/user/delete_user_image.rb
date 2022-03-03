@@ -8,7 +8,7 @@ module Mutations
       def resolve(id:)
         user = ::UserDetail.find_by(user: current_user)
 
-        user.user_images.find_by(image_id: id).destroy!
+        user.user_images.find(id).destroy!
 
         { user: user }
       end
