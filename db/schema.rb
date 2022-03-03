@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_26_145504) do
+ActiveRecord::Schema.define(version: 2022_03_02_134842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,15 @@ ActiveRecord::Schema.define(version: 2022_02_26_145504) do
   create_table "images", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "product_images", force: :cascade do |t|
+    t.bigint "image_id", null: false
+    t.bigint "product_info_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["image_id"], name: "index_product_images_on_image_id"
+    t.index ["product_info_id"], name: "index_product_images_on_product_info_id"
   end
 
   create_table "product_infos", force: :cascade do |t|
@@ -169,6 +178,8 @@ ActiveRecord::Schema.define(version: 2022_02_26_145504) do
   add_foreign_key "creator_categories", "creators"
   add_foreign_key "creator_infos", "creators"
   add_foreign_key "creators", "users"
+  add_foreign_key "product_images", "images"
+  add_foreign_key "product_images", "product_infos"
   add_foreign_key "product_infos", "products"
   add_foreign_key "products", "creators"
   add_foreign_key "purchases", "users"

@@ -2,6 +2,7 @@ class Image < ApplicationRecord
   has_one_attached :image
 
   has_one :user_image
+  has_one :product_image
 
   def name
     image.filename.to_s
