@@ -16,5 +16,7 @@ module Types
     field :create_product, mutation: Mutations::Product::CreateProduct
     field :update_product, mutation: Mutations::Product::UpdateProduct
     field :delete_product, mutation: Mutations::Product::DeleteProduct
+    field :upload_product_image, mutation: Mutations::Product::UploadProductImage
+    field :delete_product_image, mutation: Mutations::Product::DeleteProductImage
   end
 end
