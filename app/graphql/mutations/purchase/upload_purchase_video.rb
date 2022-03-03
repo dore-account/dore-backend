@@ -11,7 +11,7 @@ module Mutations
         purchase_video = user.purchases.new
 
         ActiveRecord::Base.transaction do
-          new_video = Video.new
+          new_video = ::Video.new
           # ApolloUploadServer::Uploadをそのまま渡せないのでioとfilenameを渡す
           new_video.video.attach(io: video.to_io, filename: video.original_filename)
 
