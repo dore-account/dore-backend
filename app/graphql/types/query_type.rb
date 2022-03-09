@@ -14,7 +14,7 @@ module Types
 
     # product
     field :products, resolver: Queries::Product::Products
-    field :current_products, resolver: Queries::Product::CurrentProducts
+    field :products_by_user, resolver: Queries::Product::ProductsByUser
     field :product, resolver: Queries::Product::Product
 
     # purchase
