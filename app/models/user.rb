@@ -5,5 +5,6 @@ class User < ApplicationRecord
   has_one :account
   has_one :customer
 
+  has_many :orders
   has_many :purchases, dependent: :destroy
 end
