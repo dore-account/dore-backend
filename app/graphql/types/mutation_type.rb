@@ -18,5 +18,8 @@ module Types
     field :delete_product, mutation: Mutations::Product::DeleteProduct
     field :upload_product_image, mutation: Mutations::Product::UploadProductImage
     field :delete_product_image, mutation: Mutations::Product::DeleteProductImage
+
+    # stripe
+    field :connect_stripe, mutation: Mutations::Stripe::Connect
   end
 end
