@@ -6,8 +6,7 @@ module Queries
       argument :id, ID, required: false
 
       def resolve(id:)
-        user = ::UserDetail.find_by!(user_id: id)
-        user.creator
+        ::Creator.find(id)
       rescue ActiveRecord::RecordNotFound => _e
         GraphQL::ExecutionError.new('Note does not exist.')
       rescue ActiveRecord::RecordInvalid => e
