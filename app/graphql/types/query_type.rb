@@ -9,6 +9,7 @@ module Types
     field :users, resolver: Queries::User::Users
 
     # creator
+    field :creator_by_user, resolver: Queries::Creator::CreatorByUser
     field :creator, resolver: Queries::Creator::Creator
     field :creators, resolver: Queries::Creator::Creators
 
@@ -27,5 +28,9 @@ module Types
 
     # stripe
     field :confirm_connect_stripe, resolver: Queries::Stripe::ConfirmConnect
+    field :dashboard_stripe, resolver: Queries::Stripe::Dashboard
+
+    # category
+    field :categories, resolver: Queries::Category::Categories
   end
 end
