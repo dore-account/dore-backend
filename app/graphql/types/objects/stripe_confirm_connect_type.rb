@@ -1,6 +1,6 @@
 module Types
   module Objects
-    class ConfirmConnectStripeType < BaseObject
+    class StripeConfirmConnectType < BaseObject
       field :is_completed, Boolean, null: false, description: 'コネクトが成功したか'
     end
   end

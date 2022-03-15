@@ -38,6 +38,10 @@ module Types
       def info
         object.user.user_info
       end
+
+      def images
+        object.user_images
+      end
     end
   end
 end
