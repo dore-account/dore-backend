@@ -1,12 +1,10 @@
 module Queries
-  module Creator
-    class Creator < BaseQuery
-      type Types::Objects::CreatorType, null: false
+  module Stripe
+    class ConfirmConnect < BaseQuery
+      type Types::Objects::StripeConfirmConnectType, null: false
 
-      argument :id, ID, required: false
-
-      def resolve(id:)
-        ::Creator.find(id)
+      def resolve
+        { is_completed: StripeClient.confirm_connect_account(current_creator) }
       rescue ActiveRecord::RecordNotFound => _e
         GraphQL::ExecutionError.new('Note does not exist.')
       rescue ActiveRecord::RecordInvalid => e

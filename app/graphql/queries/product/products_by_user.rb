@@ -1,12 +1,10 @@
 module Queries
-  module Creator
-    class Creator < BaseQuery
-      type Types::Objects::CreatorType, null: false
+  module Product
+    class ProductsByUser < AuthCreatorQuery
+      type [Types::Objects::ProductType], null: false
 
-      argument :id, ID, required: false
-
-      def resolve(id:)
-        ::Creator.find(id)
+      def resolve
+        current_creator.product_infos
       rescue ActiveRecord::RecordNotFound => _e
         GraphQL::ExecutionError.new('Note does not exist.')
       rescue ActiveRecord::RecordInvalid => e

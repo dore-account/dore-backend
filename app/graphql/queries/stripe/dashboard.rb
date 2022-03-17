@@ -1,12 +1,10 @@
 module Queries
-  module Creator
-    class Creator < BaseQuery
-      type Types::Objects::CreatorType, null: false
+  module Stripe
+    class Dashboard < BaseQuery
+      type Types::Objects::StripeUrlType, null: false
 
-      argument :id, ID, required: false
-
-      def resolve(id:)
-        ::Creator.find(id)
+      def resolve
+        { url: StripeClient.dashboard(current_creator) }
       rescue ActiveRecord::RecordNotFound => _e
         GraphQL::ExecutionError.new('Note does not exist.')
       rescue ActiveRecord::RecordInvalid => e

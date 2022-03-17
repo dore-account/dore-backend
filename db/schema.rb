@@ -10,17 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_02_134842) do
+ActiveRecord::Schema.define(version: 2022_03_10_061629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "customer_id", null: false
+    t.bigint "creator_id", null: false
+    t.string "account_id", null: false
+    t.boolean "is_completed", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_accounts_on_user_id"
+    t.index ["creator_id"], name: "index_accounts_on_creator_id"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -81,9 +82,39 @@ ActiveRecord::Schema.define(version: 2022_03_02_134842) do
     t.index ["user_id"], name: "index_creators_on_user_id"
   end
 
+  create_table "customers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "customer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_customers_on_user_id"
+  end
+
   create_table "images", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "product_id", null: false
+    t.integer "quantity", default: 1, null: false
+    t.integer "fee", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "creator_id", null: false
+    t.integer "amount", default: 0, null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["creator_id"], name: "index_orders_on_creator_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "product_images", force: :cascade do |t|
@@ -171,13 +202,18 @@ ActiveRecord::Schema.define(version: 2022_03_02_134842) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "accounts", "users"
+  add_foreign_key "accounts", "creators"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "creator_categories", "categories"
   add_foreign_key "creator_categories", "creators"
   add_foreign_key "creator_infos", "creators"
   add_foreign_key "creators", "users"
+  add_foreign_key "customers", "users"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "creators"
+  add_foreign_key "orders", "users"
   add_foreign_key "product_images", "images"
   add_foreign_key "product_images", "product_infos"
   add_foreign_key "product_infos", "products"

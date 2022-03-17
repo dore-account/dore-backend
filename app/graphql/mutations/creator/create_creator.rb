@@ -1,6 +1,6 @@
 module Mutations
   module Creator
-    class UpdateCreator < BaseMutation
+    class CreateCreator < AuthMutation
       field :creator, Types::Objects::CreatorType, null: false
 
       argument :params, Types::Inputs::CreatorInputType, required: true
@@ -8,11 +8,11 @@ module Mutations
       def resolve(params:)
         creator = ::Creator.find_or_create_by!(user: current_user)
 
-        creator_info = ::CreatorInfo.find_or_initialize_by(creator: creator)
-        creator_category = ::CreatorCategory.find_or_initialize_by(creator: creator)
+        creator.create_creator_info!(belongs: params.belongs)
 
-        creator_info.update!(belongs: params.belongs || '')
-        creator_category.update!(category_id: params.category_id)
+        params.category_ids.each do |category_id|
+          creator.creator_categories.create!(category_id: category_id)
+        end
 
         { creator: creator }
       rescue ActiveRecord::RecordInvalid => e

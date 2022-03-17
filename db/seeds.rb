@@ -16,8 +16,10 @@ User.create!(uid: '1', email: 'test1')
 User.create!(uid: '2', email: 'test2')
 User.create!(uid: '3', email: 'test3')
 
-UserDetail.create!(user_id: 1, slug: '', name: 'test1', gender: 0, introduction: '', birth_day_yy: 1, birth_day_mm: 1, birth_day_dd: 1, twitter_link: '', instagram_link: '', tiktok_link: '')
-UserDetail.create!(user_id: 2, slug: '', name: 'test22', gender: 1, introduction: 'hogehogehgeogheohgeo', birth_day_yy: 1, birth_day_mm: 1, birth_day_dd: 1, twitter_link: '', instagram_link: 'aa', tiktok_link: 'aa')
+UserDetail.create!(user_id: 1, name: 'test1', gender: 0, introduction: '', birth_day_yy: 1, birth_day_mm: 1,
+                   birth_day_dd: 1, twitter_link: '', instagram_link: '', tiktok_link: '')
+UserDetail.create!(user_id: 2, name: 'test22', gender: 1, introduction: 'hogehogehgeogheohgeo', birth_day_yy: 1,
+                   birth_day_mm: 1, birth_day_dd: 1, twitter_link: '', instagram_link: 'aa', tiktok_link: 'aa')
 
 Creator.create!(user_id: 1)
 Creator.create!(user_id: 2)
