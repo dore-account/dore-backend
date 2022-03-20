@@ -42,7 +42,8 @@ module StripeClient
         { id: payment_method.id,
           brand: payment_method.card.brand,
           exp_month: payment_method.card.exp_month,
-          exp_year: payment_method.card.exp_year }
+          exp_year: payment_method.card.exp_year,
+          last4: payment_method.last4, }
       end
     end
 
