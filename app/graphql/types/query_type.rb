@@ -24,7 +24,6 @@ module Types
 
     # payment_method
     field :payment_methods, resolver: Queries::PaymentMethod::PaymentMethods
-    field :setup_payment_method, resolver: Queries::PaymentMethod::SetupPaymentMethod
 
     # stripe
     field :confirm_connect_stripe, resolver: Queries::Stripe::ConfirmConnect

@@ -22,5 +22,8 @@ module Types
 
     # stripe
     field :connect_stripe, mutation: Mutations::Stripe::Connect
+
+    # payment_method
+    field :setup_payment_method, mutation: Mutations::PaymentMethod::SetupPaymentMethod
   end
 end
