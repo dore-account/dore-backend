@@ -18,7 +18,7 @@ module Types
       end
 
       def image
-        object.product_image
+        object.product.product_image
       end
     end
   end

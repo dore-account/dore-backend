@@ -18,7 +18,7 @@ module Mutations
           new_image = ::Image.new
           new_image.image.attach(io: image.to_io, filename: image.original_filename)
 
-          product.product_info.create_product_image!(image: new_image)
+          product.create_product_image!(image: new_image)
         end
 
         { product: product_info }
