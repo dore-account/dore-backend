@@ -12,7 +12,12 @@ module Mutations
           creator: current_user.creator,
           status: :active
         )
-        product_info = product.create_product_info!(params.to_h)
+        product_info = product.create_product_info!(
+          name: params.name,
+          description: params.description,
+          price: params.price
+        )
+        product.create_product_inventory!(quantity: params.qyantity)
 
         ActiveRecord::Base.transaction do
           new_image = ::Image.new

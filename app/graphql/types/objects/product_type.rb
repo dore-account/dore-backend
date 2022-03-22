@@ -5,12 +5,16 @@ module Types
       field :name, String, null: false
       field :description, String, null: false
       field :price, Integer, null: false
-      field :stock_quantity, Integer, null: false
+      field :quantity, Integer, null: false
       field :status, Types::Enums::ProductStatus, null: false
       field :image, Types::Objects::ProductImageType, null: false
 
       def id
         object.product_id
+      end
+
+      def quantity
+        object.product.product_inventory
       end
 
       def status
