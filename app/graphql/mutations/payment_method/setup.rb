@@ -1,12 +1,18 @@
 module Mutations
   module PaymentMethod
     class SetupPaymentMethod < AuthMutation
-      field :client_secret, Types::Objects::StripeClientSecretType, null: false
+      field :payment_method, Types::Objects::PaymentMethodType, null: false
 
-      def resolve
-        client_secret = StripeClient.register_card(current_user)
+      argument :params, Types::Inputs::PaymentMethodType, required: true
 
-        { client_secret: client_secret }
+      def resolve(params:)
+        payment_method = ::PaymentMethod.find_or_create_by(
+          user: current_user,
+          provider: params.provider,
+          type: params.type
+        )
+
+        { payment_method: payment_method }
       end
     end
   end
