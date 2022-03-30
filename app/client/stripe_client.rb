@@ -7,7 +7,7 @@ module StripeClient
       account = find_or_create_account(creator)
 
       account_links = Stripe::AccountLink.create({
-        account: account.account_id,
+        account: account.stripe_account_id,
         refresh_url: "#{ENV['CLIENT_HOST_URL']}/mypage",
         return_url: "#{ENV['CLIENT_HOST_URL']}/stripe/return",
         type: 'account_onboarding',
@@ -18,7 +18,7 @@ module StripeClient
 
     def confirm_connect_account(creator)
       account = Account.find_by(creator: creator)
-      account_details = Stripe::Account.retrieve(account.account_id)
+      account_details = Stripe::Account.retrieve(account.stripe_account_id)
 
       if account_details.charges_enabled && account_details.details_submitted
         account.update!(is_completed: true)
@@ -29,14 +29,14 @@ module StripeClient
 
     def dashboard(creator)
       account = Account.find_by(creator: creator)
-      link = Stripe::Account.create_login_link(account.account_id)
+      link = Stripe::Account.create_login_link(account.stripe_account_id)
       link.url
     end
 
     def get_card_list(user)
       customer = find_or_create_customer(user)
 
-      payment_methods = Stripe::PaymentMethod.list({ customer: customer.customer_id, type: 'card' })
+      payment_methods = Stripe::PaymentMethod.list({ customer: customer.stripe_customer_id, type: 'card' })
 
       payment_methods.data.map do |payment_method|
         { id: payment_method.id,
@@ -51,25 +51,25 @@ module StripeClient
       customer = find_or_create_customer(user)
 
       intent = Stripe::SetupIntent.create(
-        customer: customer.customer_id,
+        customer: customer.stripe_customer_id,
         payment_method_types: ['card']
       )
       intent.client_secret
     end
 
-    def create_payment(user, payment_method_id, amount, fee, account_id)
+    def create_payment_intent(user, payment_method_id, amount, fee, stripe_account_id)
       customer = find_or_create_customer(user)
 
       begin
         payment_intent = Stripe::PaymentIntent.create(
-          customer: customer.customer_id,
+          customer: customer.stripe_customer_id,
           payment_method: payment_method_id,
           amount: amount,
           currency: 'jpy',
           application_fee_amount: fee,
           transfer_data: {
             # 売り手のstripeアカウントID
-            destination: account_id,
+            destination: stripe_account_id,
           },
         )
 
@@ -91,7 +91,7 @@ module StripeClient
       return customer if customer
 
       customer = Stripe::Customer.create({ email: user.email })
-      Customer.create!(user: user, customer_id: customer.id)
+      Customer.create!(user: user, stripe_customer_id: customer.id)
     end
 
     def find_or_create_account(creator)
@@ -108,7 +108,7 @@ module StripeClient
           transfers: {requested: true},
         },
       })
-      Account.create!(creator: creator, account_id: account.id)
+      Account.create!(creator: creator, stripe_account_id: account.id)
     end
   end
 end
