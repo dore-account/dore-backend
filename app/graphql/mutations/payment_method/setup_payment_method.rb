@@ -3,7 +3,7 @@ module Mutations
     class SetupPaymentMethod < AuthMutation
       field :payment_method, Types::Objects::PaymentMethodType, null: false
 
-      argument :params, Types::Inputs::PaymentMethodType, required: true
+      argument :params, Types::Inputs::PaymentMethodInputType, required: true
 
       def resolve(params:)
         payment_method = ::PaymentMethod.find_or_create_by(
