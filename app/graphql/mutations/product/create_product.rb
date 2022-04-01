@@ -17,7 +17,7 @@ module Mutations
           description: params.description,
           price: params.price
         )
-        product.create_product_inventory!(quantity: params.qyantity)
+        product.create_product_inventory!(quantity: params.quantity)
 
         ActiveRecord::Base.transaction do
           new_image = ::Image.new
