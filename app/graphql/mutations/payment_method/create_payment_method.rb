@@ -1,7 +1,7 @@
 module Mutations
   module PaymentMethod
     class CreatePaymentMethod < AuthMutation
-      field :client_secret, Types::Objects::StripeClientSecretType, null: false
+      field :client_secret, String, null: false, description: 'クライアントに渡すkey'
 
       def resolve
         client_secret = StripeClient.register_card(current_user)
