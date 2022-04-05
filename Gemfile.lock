@@ -245,6 +245,7 @@ GEM
 
 PLATFORMS
   ruby
+  arm64-darwin
 
 DEPENDENCIES
   apollo_upload_server (= 2.1.0)

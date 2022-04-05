@@ -130,6 +130,9 @@ docker compose run --rm web rails db:migrate
 
 # コンテナの立ち上げ
 docker compose up -d
+
+### m1 mac の方
+ビルドに失敗した場合は、Dockerfileに書いてあるように https -> httpにしてください。
 ```
 
 ```
