@@ -2,7 +2,7 @@ FROM ruby:3.0.1
 
 ## nodejsとyarnはwebpackをインストールする際に必要
 # yarnパッケージ管理ツールをインストール
-# RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 
 ## For m1 mac see : https://github.com/laravel/sail/issues/159#issuecomment-861588485
 # RUN curl -sS http://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
