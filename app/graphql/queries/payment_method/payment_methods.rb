@@ -1,7 +1,7 @@
 module Queries
   module PaymentMethod
     class PaymentMethods < BaseQuery
-      type [Types::Objects::PaymentMethodType], null: false
+      type [Types::Objects::StripeCardType], null: false
 
       def resolve
         StripeClient.get_card_list(current_user)

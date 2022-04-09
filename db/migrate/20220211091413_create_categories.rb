@@ -3,7 +3,6 @@ class CreateCategories < ActiveRecord::Migration[6.1]
     create_table :categories do |t|
       t.string :name, defalut: ''
 
-
       t.timestamps
     end
   end

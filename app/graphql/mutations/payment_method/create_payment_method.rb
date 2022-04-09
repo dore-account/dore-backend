@@ -1,7 +1,7 @@
-module Queries
+module Mutations
   module PaymentMethod
-    class SetupPaymentMethod < BaseQuery
-      type Types::Objects::StripeClientSecretType, null: false
+    class CreatePaymentMethod < AuthMutation
+      field :client_secret, String, null: false, description: 'クライアントに渡すkey'
 
       def resolve
         client_secret = StripeClient.register_card(current_user)
