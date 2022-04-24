@@ -31,4 +31,9 @@ CreatorCategory.create!(creator_id: 2, category_id: 2)
 CreatorCategory.create!(creator_id: 2, category_id: 3)
 
 Product.create!(creator_id: 1, status: 1)
-ProductInfo.create!(product_id: 1, name: '商品1', description: 'testtest', price: 1000, stock_quantity: 3)
+ProductInfo.create!(product_id: 1, name: '商品1', description: 'testtest', price: 1000)
+ProductInventory.create!(product_id: 1, quantity: 2)
+
+Product.create!(creator_id: 2, status: 1)
+ProductInfo.create!(product_id: 2, name: '商品2', description: 'testtest', price: 1000)
+ProductInventory.create!(product_id: 2, quantity: 1)

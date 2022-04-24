@@ -10,9 +10,6 @@ module Types
     # creator
     field :create_creator, mutation: Mutations::Creator::CreateCreator
 
-    # purchase
-    field :upload_purchase_video, mutation: Mutations::Purchase::UploadPurchaseVideo
-
     # product
     field :create_product, mutation: Mutations::Product::CreateProduct
     field :update_product, mutation: Mutations::Product::UpdateProduct
@@ -26,5 +23,11 @@ module Types
     # payment_method
     field :create_payment_method, mutation: Mutations::PaymentMethod::CreatePaymentMethod
     field :setup_payment_method, mutation: Mutations::PaymentMethod::SetupPaymentMethod
+
+    # order
+    field :create_order, mutation: Mutations::Order::CreateOrder
+
+    # purchase
+    field :upload_purchase_video, mutation: Mutations::Purchase::UploadPurchaseVideo
   end
 end
