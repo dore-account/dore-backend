@@ -81,7 +81,7 @@ docker ps
 #コンテナに入る
 docker exec -it コンテナ名 /bin/bash
 
-// docker exec -it dore-backend_web_1 /bin/bash
+// docker exec -it dore-backend-web-1 /bin/bash
 
 #railsコンソールを開く
 root@96913c74e902:/app# bundle exec rails c
