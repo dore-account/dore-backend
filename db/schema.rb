@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_10_061629) do
+ActiveRecord::Schema.define(version: 2022_03_30_105851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.bigint "creator_id", null: false
-    t.string "account_id", null: false
+    t.string "stripe_account_id", null: false
     t.boolean "is_completed", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -52,6 +52,16 @@ ActiveRecord::Schema.define(version: 2022_03_10_061629) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "balances", force: :cascade do |t|
+    t.bigint "creator_id", null: false
+    t.bigint "order_item_id", null: false
+    t.integer "amount", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["creator_id"], name: "index_balances_on_creator_id"
+    t.index ["order_item_id"], name: "index_balances_on_order_item_id"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -84,7 +94,7 @@ ActiveRecord::Schema.define(version: 2022_03_10_061629) do
 
   create_table "customers", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "customer_id", null: false
+    t.string "stripe_customer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_customers_on_user_id"
@@ -99,7 +109,6 @@ ActiveRecord::Schema.define(version: 2022_03_10_061629) do
     t.bigint "order_id", null: false
     t.bigint "product_id", null: false
     t.integer "quantity", default: 1, null: false
-    t.integer "fee", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_order_items_on_order_id"
@@ -109,7 +118,6 @@ ActiveRecord::Schema.define(version: 2022_03_10_061629) do
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "creator_id", null: false
-    t.integer "amount", default: 0, null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -117,13 +125,31 @@ ActiveRecord::Schema.define(version: 2022_03_10_061629) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "payment_methods", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "provider", default: "", null: false
+    t.string "type", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_payment_methods_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "payment_method_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_payments_on_order_id"
+    t.index ["payment_method_id"], name: "index_payments_on_payment_method_id"
+  end
+
   create_table "product_images", force: :cascade do |t|
     t.bigint "image_id", null: false
-    t.bigint "product_info_id", null: false
+    t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["image_id"], name: "index_product_images_on_image_id"
-    t.index ["product_info_id"], name: "index_product_images_on_product_info_id"
+    t.index ["product_id"], name: "index_product_images_on_product_id"
   end
 
   create_table "product_infos", force: :cascade do |t|
@@ -131,10 +157,17 @@ ActiveRecord::Schema.define(version: 2022_03_10_061629) do
     t.string "name", default: "", null: false
     t.string "description", default: "", null: false
     t.integer "price", null: false
-    t.integer "stock_quantity", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_product_infos_on_product_id"
+  end
+
+  create_table "product_inventories", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.integer "quantity", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_product_inventories_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -205,6 +238,8 @@ ActiveRecord::Schema.define(version: 2022_03_10_061629) do
   add_foreign_key "accounts", "creators"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "balances", "creators"
+  add_foreign_key "balances", "order_items"
   add_foreign_key "creator_categories", "categories"
   add_foreign_key "creator_categories", "creators"
   add_foreign_key "creator_infos", "creators"
@@ -214,9 +249,13 @@ ActiveRecord::Schema.define(version: 2022_03_10_061629) do
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "creators"
   add_foreign_key "orders", "users"
+  add_foreign_key "payment_methods", "users"
+  add_foreign_key "payments", "orders"
+  add_foreign_key "payments", "payment_methods"
   add_foreign_key "product_images", "images"
-  add_foreign_key "product_images", "product_infos"
+  add_foreign_key "product_images", "products"
   add_foreign_key "product_infos", "products"
+  add_foreign_key "product_inventories", "products"
   add_foreign_key "products", "creators"
   add_foreign_key "purchases", "users"
   add_foreign_key "purchases", "videos"
