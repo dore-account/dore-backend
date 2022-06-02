@@ -8,6 +8,10 @@ initial: ## 初期セットアップ
 	$(DOCKER_COMPOSE_EXEC) web rails db:migrate
 	$(DOCKER_COMPOSE_EXEC) web rails db:seed
 
+### graphql
+schema-dump:
+	$(DOCKER_COMPOSE_EXEC) web rails graphql:schema:dump
+
 ### Docker Compose ###
 dup:
 	$(DOCKER_COMPOSE) up -d
