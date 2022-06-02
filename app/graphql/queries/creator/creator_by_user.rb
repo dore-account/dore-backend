@@ -4,8 +4,7 @@ module Queries
       type Types::Objects::CreatorType, null: true
 
       def resolve
-        user = ::UserDetail.find_by!(user: current_user)
-        user.creator
+        ::Creator.find_by(user: current_user)
       rescue ActiveRecord::RecordNotFound => _e
         GraphQL::ExecutionError.new('Note does not exist.')
       rescue ActiveRecord::RecordInvalid => e
