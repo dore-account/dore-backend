@@ -160,13 +160,9 @@
               "name": "params",
               "description": null,
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "CreatorInput",
-                  "ofType": null
-                }
+                "kind": "INPUT_OBJECT",
+                "name": "CreatorInput",
+                "ofType": null
               },
               "defaultValue": null,
               "isDeprecated": false,
@@ -593,19 +589,15 @@
               "name": "categories",
               "description": "クリエイターのカテゴリー",
               "type": {
-                "kind": "NON_NULL",
+                "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "LIST",
+                  "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "OBJECT",
-                      "name": "CreatorCategory",
-                      "ofType": null
-                    }
+                    "kind": "OBJECT",
+                    "name": "CreatorCategory",
+                    "ofType": null
                   }
                 }
               },
@@ -1913,13 +1905,9 @@
               "name": "image",
               "description": null,
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "ProductImage",
-                  "ofType": null
-                }
+                "kind": "OBJECT",
+                "name": "ProductImage",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null,

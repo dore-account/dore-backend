@@ -39,7 +39,7 @@ input CreateCreatorInput {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
-  params: CreatorInput!
+  params: CreatorInput
 }
 
 """
@@ -150,7 +150,7 @@ type Creator {
   """
   クリエイターのカテゴリー
   """
-  categories: [CreatorCategory!]!
+  categories: [CreatorCategory!]
 
   """
   クリエイターID
@@ -414,7 +414,7 @@ type Product {
   プロダクトID
   """
   id: ID!
-  image: ProductImage!
+  image: ProductImage
   name: String!
   price: Int!
   quantity: Int!
